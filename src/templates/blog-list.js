@@ -8,7 +8,7 @@ import {FiSearch} from 'react-icons/fi';
 import About from '../components/about';
 
 
-class BlogpostList extends Component{
+class BlogList extends Component{
     // constructor(props) {
     //     super(props);
     //     this.timeline = new Timeline({ paused: true });
@@ -48,7 +48,7 @@ class BlogpostList extends Component{
 }
 
 
-export default BlogpostList;
+export default BlogList;
 
 
 export const query = graphql`
