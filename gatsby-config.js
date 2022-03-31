@@ -3,7 +3,7 @@ require('dotenv').config()
 
 module.exports = {
     siteMetadata: {
-      title: `staqsnqs`,
+      title: `staqs'n'Qs`,
       author: `Hill Onyechekwa`,
       description: 'A blog about software development, programming, and life.',
       siteUrl: `https://staqsnqs.netlify.app/`,
@@ -11,7 +11,6 @@ module.exports = {
     },
     plugins: [
         'gatsby-plugin-react-helmet',
-        'gatsby-plugin-sass',
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
         'gatsby-plugin-offline',
@@ -55,66 +54,75 @@ module.exports = {
                     shortname: 'staqsnqs',
                 },
           },
-        //   {
-        //     resolve: 'gatsby-plugin-robots-txt',
-        //     options: {
-        //       host: 'https://staqsnqs.netlify.app',
-        //       sitemap: 'https://staqsnqs.netlify.app/sitemap.xml',
-        //       policy: [{userAgent: '*', allow: '/'}]
-        //     }
-        //   },
-        //   {
-        //     resolve: `gatsby-plugin-feed`,
-        //     options: {
-        //       query: `
-        //         {
-        //           site {
-        //             siteMetadata {
-        //               title
-        //               description
-        //               siteUrl
-        //               site_url: siteUrl
-        //             }
-        //           }
-        //         }
-        //       `,
-        //       feeds: [
-        //         {
-        //           serialize: ({ query: { site, allGraphcmsPost } }) => {
-        //             return allGraphcmsPost.edges.map(edge => {
-        //               return Object.assign({}, edge.node.frontmatter, {
-        //                 description: edge.node.excerpt,
-        //                 date: edge.node.frontmatter.date,
-        //                 url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-        //                 guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-        //                 custom_elements: [{ "content:encoded": edge.node.html }],
-        //               })
-        //             })
-        //           },
-        //           query: `
-        //             {
-        //               allMarkdownRemark(
-        //                 sort: { order: DESC, fields: [frontmatter___date] },
-        //               ) {
-        //                 edges {
-        //                   node {
-        //                     excerpt
-        //                     html
-        //                     fields { slug }
-        //                     frontmatter {
-        //                       title
-        //                       date
-        //                     }
-        //                   }
-        //                 }
-        //               }
-        //             }
-        //           `,
-        //           output: "/rss.xml",
-        //           title: "Your Site's RSS Feed",
-        //         },
-        //       ],
-        //     },
-        //   },
+          {
+            resolve: 'gatsby-plugin-robots-txt',
+            options: {
+              host: 'https://staqsnqs.netlify.app',
+              sitemap: 'https://staqsnqs.netlify.app/sitemap.xml',
+              policy: [{userAgent: '*', allow: '/'}]
+            }
+          },
+          {
+            resolve: 'gatsby-plugin-sass',
+            options: {
+              additionalData: '@use "base" as *;',
+              sassOptions: {
+                includePaths: ["${__dirname}/src/styles"]
+              }
+            }
+          },
+          {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+              query: `
+                {
+                  site {
+                    siteMetadata {
+                      title
+                      description
+                      siteUrl
+                      site_url: siteUrl
+                    }
+                  }
+                }
+              `,
+              feeds: [
+                {
+                  serialize: ({ query: { site, allGraphCmsPost } }) => {
+                    return allGraphcmsPost.edges.map(({node}) => {
+                      return Object.assign({}, node, {
+                        description: node.excerpt,
+                        date: node.date,
+                        url: site.siteMetadata.siteUrl + node.slug,
+                        guid: site.siteMetadata.siteUrl + node.slug,
+                        custom_elements: [{ "content:encoded": node.html }],
+                      })
+                    })
+                  },
+                  query: `
+                    {
+                      allGraphCmsPost(
+                        sort: {order: DESC, fields: date},
+                      ) {
+                        edges {
+                          node {
+                                slug
+                                title
+                                content {
+                                html
+                                }
+                                description
+                                createdAt: date
+                            }
+                        }
+                      }
+                    }
+                  `,
+                  output: "/rss.xml",
+                  title: "staqsnqs rss feed",
+                },
+              ],
+            },
+          },
     ]
 }

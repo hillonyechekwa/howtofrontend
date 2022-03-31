@@ -1,17 +1,41 @@
 .nav{
     width: 100%;
-    height: 80px;
+    height: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: column;
+    padding: 5px 20px 5px 20px;
+}
+
+#line{
+    width: 40%;
+    height: 5px;
+    border-radius: 2px;
+    background-color: $primary;
+}
+
+.logo{
+    font-family: $title-font;
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: $jet-black;
+}
+
+.nav-items{
+    width: 20%;
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo{
-    width: 100px;
-    height: 100px;
-    h1{
-        font-family: $prime-font;
-        font-size: 2.5rem;
-        text-transform: upppercase;
-    }
+.nav-item{
+    font-family: $text-font;
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: $black;
+    text-transform: capitalize;
 }

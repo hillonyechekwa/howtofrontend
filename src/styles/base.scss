@@ -1,9 +1,17 @@
-$prime-font: "Inter", sans-serif;
-$accent-font: "Nanum Gothic", sans-serif;
+$title-font: "IBM Plex Sans", sans-serif;
+$text-font: "Inter", sans-serif;
 $primary: #5C2D93;
 $light: #866D9D;
 $off-white: #FFFADE;
+$jet-black: #0A0A0A;
 $grey-one: #7D7484;
 $grey-two: #B1A8B9;
 $white: #fff;
 $black: #000;
+
+
+
+*, *:before, *::after{
+    margin: 0px;
+    box-sizing: border-box;
+}

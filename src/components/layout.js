@@ -1,15 +1,18 @@
 import React from 'react';
 import Footer from './footer';
 import Nav from './nav'
+import '../styles/layout.scss'
 
 
 const Layout = ({children}) => {
     return(
-        <div>
+        <div className="container">
+            <div className="wrapper">
             <Nav />
-            <main>
+            <main className="content">
                 {children}
             </main>
+            </div>
             <Footer />
         </div>
     )
