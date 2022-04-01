@@ -73,12 +73,12 @@ class BlogList extends Component{
                 </ul>
                 <nav className="pagination">
                     {!isFirst && (
-                        <Link to={prevPage} rel='prev'>
+                        <Link to={prevPage} className="prevpage" rel='prev'>
                            <FiChevronLeft />  newer
                         </Link>
                     )}
                     {!isLast && (
-                        <Link to={nextPage} rel='next'>
+                        <Link to={nextPage} className="nextpage" rel='next'>
                             older <FiChevronRight/>
                         </Link>
                     )}

@@ -104,11 +104,21 @@
         color: $jet-black;
         text-decoration: none;
         position: relative;
-        left: 80%;
+        top: 30px;
         &:hover{
             color: $light;
         }
     }
+}
+
+.nextpage{
+    position: relative;
+    left: 80%;
+}
+
+.prevpage{
+    position: relative;
+    left: 5%;
 }
 
 

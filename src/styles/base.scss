@@ -14,7 +14,8 @@ $shadow-box2: 1px 1px 13px 0px rgba(0,0,0,0.2);
 
 
 
-*, *:before, *::after{
+html{
     margin: 0px;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
