@@ -1,9 +1,15 @@
 import React, {
     Component
 } from 'react';
-import Layout from '../components/layout'
 import Seo from '../components/seo'
-import {graphql} from 'gatsby';
+import {graphql, Link} from 'gatsby';
+import {Timeline, Power1} from 'gsap/all'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import {FiClock, FiTag, FiChevronLeft, FiArrowRight, FiArrowLeft} from 'react-icons/fi';
+import {IconContext} from "react-icons";
+import { Disqus, commentCount} from 'gatsby-plugin-disqus'
+import '../styles/post.scss'
 
 
 class BlogPostTemplate extends Component{
@@ -12,19 +18,45 @@ class BlogPostTemplate extends Component{
         const post = data.graphCmsPost;
         const {previous, next} = this.props.pageContext;
         const {title, createdAt, tag, content, description} = post                
+        dayjs.extend(relativeTime)
 
         return(
-            <main>
-                <header>
+            <main className="post-wrapper">
+                <header className="post-header">
+                <IconContext.Provider value={{ className: "post-icons"}}>
+                    <Link to="/" className="backlink"> <FiChevronLeft /> go back </Link>
                     <h1>{title}</h1>
-                    <small>{createdAt}</small>
-                    <small>{tag}</small>
+                    <small className="date"><FiClock /> {dayjs(createdAt).fromNow()}</small>
+                    <small className="tag"><FiTag /> {tag}</small>
+                </IconContext.Provider>
                 </header>
                 <article
                 dangerouslySetInnerHTML={{__html: content.html}}
                 itemProp="article-body"
                 className="post-body"
                 ></article>
+                <ul className="other-posts">
+                    <li className="previous">
+                        previous
+                        {
+                            previous && (
+                                <Link to={previous.slug} rel="prev">
+                                    <FiArrowLeft /> {previous.title}
+                                </Link>
+                            )
+                        }
+                    </li>
+                    <li className="next">
+                        next
+                        {
+                            next && (
+                                <Link to={next.slug} rel="next">
+                                    <FiArrowRight /> {next.title}
+                                </Link>
+                            )
+                        }
+                    </li>
+                </ul>
             </main>
         )
     }

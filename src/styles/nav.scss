@@ -6,21 +6,23 @@
     align-items: center;
     flex-flow: column;
     padding: 5px 20px 5px 20px;
+    background-color: $primary;
+    background-image: url('../images/grainy.png');
+    background-position: center;
+    background-size: cover;
 }
 
-#line{
-    width: 40%;
-    height: 5px;
-    border-radius: 2px;
-    background-color: $primary;
-}
 
 .logo{
     font-family: $title-font;
     font-weight: 700;
     font-size: 2rem;
     text-transform: capitalize;
-    color: $jet-black;
+    // color: $jet-black;
+    a{
+        text-decoration: none;
+        color: $off-white;
+    }
 }
 
 .nav-items{
@@ -29,13 +31,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    top: -20px;
 }
 
 .nav-item{
     font-family: $text-font;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-decoration: none;
-    color: $black;
-    text-transform: capitalize;
+    // color: $black;
+    color: $off-white;
+    text-transform: lowercase;
 }

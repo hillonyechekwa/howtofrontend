@@ -1,5 +1,5 @@
 .list-wrapper{
-    width: 70vw;
+    width: 50vw;
     height: auto;
     position: relative;
     left: 10%;
@@ -22,19 +22,26 @@
 }
 
 .posts{
+    height: 120px;
     padding: 5px;
     margin-bottom: 50px;
     position: relative;
+    &:hover{
+        box-shadow: $shadow-box1;
+        background-color: $white;
+        background-image: url('../images/grainy.png');
+        background-attachment: fixed;
+    }
     .post-title{
         text-decoration: none;
         font-family: $text-font;
-        color: $black;
+        color: $jet-black;
     }
     h2{
         font-size: 2rem;
         font-weight: 400;
         &:hover{
-            color: $primary;
+            color: $light;
         }
     }      
     p{
@@ -49,6 +56,10 @@
         font-family: $text-font;
         position: relative;
         left: 5%;
+        span{
+            font-size: 3rem;
+            color: $primary;
+        }
     }
 }
 
@@ -81,4 +92,24 @@
 .small-icons{
     color: $primary;
 }
+
+.pagination {
+    background-color: transparent;
+    position: relative;
+    a{
+        font-family: $text-font;
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-transform: capitalize;
+        color: $jet-black;
+        text-decoration: none;
+        position: relative;
+        left: 80%;
+        &:hover{
+            color: $light;
+        }
+    }
+}
+
+
 

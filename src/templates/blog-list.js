@@ -5,7 +5,7 @@ import {graphql, Link} from 'gatsby'
 import {Timeline, Power1} from 'gsap/all'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import {FiClock, FiTag, FiChevronsRight} from 'react-icons/fi';
+import {FiClock, FiTag, FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import { IconContext } from "react-icons";
 import About from '../components/about';
 import "../styles/list.scss"
@@ -29,7 +29,16 @@ class BlogList extends Component{
         dayjs.extend(relativeTime)
         return(
                 <main className="list-wrapper">
+                    {
+                        isFirst && (
                     <h1 className="page-heading">Latest Posts</h1>
+                        )
+                    }
+                    {
+                        !isFirst && (
+                    <h1 className="page-heading">Posts</h1>
+                        )
+                    }
                     <ul className="post-list">
                     {
                     posts.map(({node}) => {
@@ -39,28 +48,41 @@ class BlogList extends Component{
                         const description = node.description
                         const tag = node.tag
                         const date = node.createdAt
+                        console.log(slug)
                         return(
                             <li className="posts" key={id}>
                                 <span className="title-wrapper">
-                                <Link className="post-title" to={slug} key={`post-${slug}`}>
+                                <Link className="post-title" to={`/${slug}`} key={`post-${slug}`}>
                                     <h2>{title}</h2>
                                 </Link>
                                 <IconContext.Provider value={{ className: "small-icons" }}>
                                     <small>
-                                         <FiTag/> {tag} | <FiClock /> {
+                                         <FiTag/> {tag} <span>.</span> <FiClock /> {
                                         dayjs(date).fromNow()
                                          }
                                     </small>
                                 </IconContext.Provider>
                                 </span>
                                     <p>{description}</p>
-                                    <Link to={slug} className="read-more">Read More <FiChevronsRight/></Link>
+                                    <Link to={`/${slug}`} className="read-more">Read More <FiChevronRight/></Link>
                                 
                             </li>
                         )
                     })
                 }
                 </ul>
+                <nav className="pagination">
+                    {!isFirst && (
+                        <Link to={prevPage} rel='prev'>
+                           <FiChevronLeft />  newer
+                        </Link>
+                    )}
+                    {!isLast && (
+                        <Link to={nextPage} rel='next'>
+                            older <FiChevronRight/>
+                        </Link>
+                    )}
+                </nav>
                 </main>
         )
     }
