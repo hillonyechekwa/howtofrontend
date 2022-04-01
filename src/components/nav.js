@@ -18,10 +18,11 @@ const Nav = () => {
         <nav className="nav">
             <h1 className="logo"><Link to="/">{title} </Link> </h1>
             <nav className="nav-items">
-             <Link to="/about" className="nav-item">about</Link>
-             <Link to="/subscribe" className="nav-item">subscribe</Link>
-             <Link to="/search" className="nav-item">search</Link>
+             <Link active to="/about" className="nav-item" activeClassName='active'>about</Link>
+             <Link to="/subscribe" className="nav-item" activeClassName='active'>subscribe</Link>
+             <Link to="/search" className="nav-item" activeClassName='active'>search</Link>
             </nav>
+            <div className="line"></div>
         </nav>
     )
 }

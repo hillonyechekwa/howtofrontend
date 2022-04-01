@@ -1,5 +1,5 @@
 .list-wrapper{
-    width: 50vw;
+    width: 60vw;
     height: auto;
     position: relative;
     left: 10%;
@@ -22,7 +22,7 @@
 }
 
 .posts{
-    height: 120px;
+    height: 180px;
     padding: 5px;
     margin-bottom: 50px;
     position: relative;
@@ -59,6 +59,9 @@
         span{
             font-size: 3rem;
             color: $primary;
+        }
+        a{
+            color: $jet-black;
         }
     }
 }

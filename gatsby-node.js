@@ -1,30 +1,39 @@
 const path = require('path')
+const _ = require('lodash')
 // const createFilePath = require('gatsby-source-filesystem')
 
 exports.createPages = async ({graphql, actions}) => {
     const {createPage} = actions
     const blogPost = path.resolve(`./src/templates/blog-post.js`)
-
+    const tagTemplate = path.resolve('./src/templates/tags.js')
     return await graphql(`
     {
-        allGraphCmsPost(
+        cmsPosts: allGraphCmsPost(
             sort: {fields: date, order: DESC}
-            limit: 1000
+            limit: 2000
             ) {
           edges {
             node {
               title
               slug
+              tag
             }
           }
         }
+        cmsTags: allGraphCmsPost(
+            limit: 2000
+            ){
+            group(field: tag) {
+                fieldValue
+                }
+            }
       }
     `).then(result => {
         if(result.errors){
             throw result.errors
         }
 
-        const posts = result.data.allGraphCmsPost.edges
+        const posts = result.data.cmsPosts.edges
 
         posts.forEach((post,index) => {
             const next = index === 0 ? null : posts[index - 1].node
@@ -56,6 +65,18 @@ exports.createPages = async ({graphql, actions}) => {
                 }
             })
     })
+
+        const tags = result.data.cmsTags.group
+
+        tags.forEach(tag => {
+            createPage({
+                path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+                component: tagTemplate,
+                context: {
+                    tag: tag.fieldValue
+                }
+            })
+        })
 })
 
 }

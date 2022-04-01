@@ -57,7 +57,7 @@ class BlogList extends Component{
                                 </Link>
                                 <IconContext.Provider value={{ className: "small-icons" }}>
                                     <small>
-                                         <FiTag/> {tag} <span>.</span> <FiClock /> {
+                                         <FiTag/> <Link to={`/tags/${tag}`}> {tag} </Link> <span>.</span> <FiClock /> {
                                         dayjs(date).fromNow()
                                          }
                                     </small>

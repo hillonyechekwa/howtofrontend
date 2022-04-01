@@ -2,13 +2,13 @@ import React, {
     Component
 } from 'react';
 import Seo from '../components/seo'
-import {graphql, Link} from 'gatsby';
+import {graphql, Link, navigate} from 'gatsby';
 import {Timeline, Power1} from 'gsap/all'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronLeft, FiArrowRight, FiArrowLeft} from 'react-icons/fi';
 import {IconContext} from "react-icons";
-import { Disqus, CommentCount} from 'gatsby-plugin-disqus'
+import { Disqus } from 'gatsby-plugin-disqus'
 import '../styles/post.scss'
 
 
@@ -30,11 +30,10 @@ class BlogPostTemplate extends Component{
             <main className="post-wrapper">
                 <header className="post-header">
                 <IconContext.Provider value={{ className: "post-icons"}}>
-                    <Link to="/" className="backlink"> <FiChevronLeft /> back to blog </Link>
+                    <Link to="/" className="backlink" onClick={() => navigate(-1)}> <FiChevronLeft /> back to blog </Link>
                     <h1>{title}</h1>
                     <small className="date"><FiClock /> {dayjs(createdAt).fromNow()}</small>
-                    <small className="tag"><FiTag /> {tag}</small>
-                    <CommentCount config={disqusConfig} placeholder={'...'} />
+                    <small className="tag"><FiTag /> <Link to={`/tags/${tag}`}> {tag}</Link> </small>
                 </IconContext.Provider>
                 </header>
                 <article
