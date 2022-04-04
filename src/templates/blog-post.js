@@ -3,6 +3,7 @@ import React, {
     createRef
 } from 'react';
 import Seo from '../components/seo'
+import Loader from '../components/loader'
 import {graphql, Link, navigate} from 'gatsby';
 import {gsap} from 'gsap'
 import dayjs from 'dayjs'
@@ -16,6 +17,9 @@ import '../styles/post.scss'
 class BlogPostTemplate extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+            isLoading: false,
+        }
         this.headerRef = createRef();
         this.contentRef = createRef();
         this.postendRef = createRef();
@@ -46,6 +50,10 @@ class BlogPostTemplate extends Component{
             title: title,
         }
         dayjs.extend(relativeTime)
+        
+        if(this.state.isLoading){
+            return <Loader />
+        }
 
         return(
             <main className="post-wrapper">

@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import {graphql, Link, navigate} from 'gatsby'
 import {gsap} from 'gsap'
+import Loader from '../components/loader'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronRight, FiChevronLeft} from 'react-icons/fi';
@@ -14,6 +15,9 @@ import "../styles/list.scss"
 class BlogList extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+            isLoading: false,
+        }
       }
 
 
@@ -27,7 +31,12 @@ class BlogList extends Component{
         const prevPage = currentPage - 1 === 1 ? '/' : (currentPage - 1).toString()
         const nextPage = (currentPage + 1).toString()
         dayjs.extend(relativeTime)
-        return(
+
+        if(this.state.isLoading){
+            return <Loader />
+        }
+
+        return (
                 <main className="list-wrapper">
                     {
                         isFirst && (
@@ -52,7 +61,7 @@ class BlogList extends Component{
                         return(
                             <li className="posts" key={id}>
                                 <span className="title-wrapper">
-                                <Link className="post-title" to={`/${slug}`} key={`post-${slug}`} onClick={e => this.changePage(e, `/${slug}`)}>
+                                <Link className="post-title" to={`/${slug}`} key={`post-${slug}`}>
                                     <h2>{title}</h2>
                                 </Link>
                                 <IconContext.Provider value={{ className: "small-icons" }}>
@@ -85,7 +94,7 @@ class BlogList extends Component{
                     )}
                 </nav>
                 </main>
-        )
+        ) 
     }
 }
 
