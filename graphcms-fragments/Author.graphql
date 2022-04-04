@@ -5,7 +5,14 @@ fragment Author on Author {
   updatedAt
   publishedAt
   name
-  bio
+  bio {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename

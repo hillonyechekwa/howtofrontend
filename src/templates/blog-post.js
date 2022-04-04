@@ -1,9 +1,10 @@
 import React, {
-    Component
+    Component,
+    createRef
 } from 'react';
 import Seo from '../components/seo'
 import {graphql, Link, navigate} from 'gatsby';
-import {Timeline, Power1} from 'gsap/all'
+import {gsap} from 'gsap'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronLeft, FiArrowRight, FiArrowLeft} from 'react-icons/fi';
@@ -13,6 +14,26 @@ import '../styles/post.scss'
 
 
 class BlogPostTemplate extends Component{
+    constructor(props) {
+        super(props);
+        this.headerRef = createRef();
+        this.contentRef = createRef();
+        this.postendRef = createRef();
+    }
+
+
+    componentDidMount () {
+        gsap.from([this.headerRef, this.contentRef, this.postendRef],{
+            duration: 0.8,
+            dealy: 0.6,
+            ease: "power3.easeOut",
+            y: 100,
+            stagger:{
+                amount: 0.15
+            }
+        })
+    }
+
     render() {
         const {data} = this.props;
         const post = data.graphCmsPost;
@@ -28,20 +49,21 @@ class BlogPostTemplate extends Component{
 
         return(
             <main className="post-wrapper">
-                <header className="post-header">
+                <header className="post-header" ref={el => this.headerRef = el}>
                 <IconContext.Provider value={{ className: "post-icons"}}>
-                    <Link to="/" className="backlink" onClick={() => navigate(-1)}> <FiChevronLeft /> back to blog </Link>
+                    <Link to="/" className="backlink"> <FiChevronLeft /> back to blog </Link>
                     <h1>{title}</h1>
                     <small className="date"><FiClock /> {dayjs(createdAt).fromNow()}</small>
                     <small className="tag"><FiTag /> <Link to={`/tags/${tag}`}> {tag}</Link> </small>
                 </IconContext.Provider>
                 </header>
                 <article
+                ref={el => this.contentRef = el}
                 dangerouslySetInnerHTML={{__html: content.html}}
                 itemProp="article-body"
                 className="post-body"
                 ></article>
-                <section className="post-end">
+                <section className="post-end" ref={el => this.postendRef = el}>
                 <ul className="other-posts">
                     <li className="previous">
                         {

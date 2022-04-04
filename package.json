@@ -29,6 +29,7 @@
     "gatsby-plugin-sass": "^5.10.2",
     "gatsby-plugin-sharp": "^4.10.2",
     "gatsby-plugin-sitemap": "^5.10.2",
+    "gatsby-plugin-transition-link": "^1.20.5",
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^4.10.1",
     "gatsby-source-graphcms": "^2.8.0",
@@ -38,6 +39,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
+    "react-transition-group": "^4.4.2",
     "sass": "^1.49.9"
   }
 }

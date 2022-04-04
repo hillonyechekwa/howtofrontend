@@ -5,6 +5,7 @@ import KebabCase from 'lodash/kebabCase'
 
 import {Helmet} from 'react-helmet'
 import {Link, graphql} from 'gatsby'
+import '../styles/tags.scss'
 
 const TagsPage = ({
     data: {
@@ -15,11 +16,11 @@ const TagsPage = ({
     }
 }) => {
     return(
-        <main>
+        <main className="tags-wrapper">
             <Helmet title={title} />
             <section>
-                <h1>Tags</h1>
-                <ul>
+                <h1 className="tags-heading">Tags</h1>
+                <ul className="tag-list">
                     {
                         group.map(tag => (
                             <li key={tag.fieldValue}>

@@ -3,7 +3,7 @@ require('dotenv').config()
 
 module.exports = {
     siteMetadata: {
-      title: `staqs'n'Qs`,
+      title: `staqs-n-Qs`,
       author: `Hill Onyechekwa`,
       description: 'A blog about software development, programming, and life.',
       siteUrl: `https://staqsnqs.netlify.app/`,

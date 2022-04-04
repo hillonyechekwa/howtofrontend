@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import {Link, graphql} from 'gatsby';
 
+import '../styles/tag.scss'
+
 const Tags = ({pageContext, data}) => {
     const { tag }= pageContext
     const {edges, totalCount} = data.allGraphCmsPost
@@ -11,9 +13,9 @@ const Tags = ({pageContext, data}) => {
       } tagged with "${tag}"`
 
       return(
-          <main>
-              <h1>{tagHeader}</h1>
-              <ul>
+          <main className="tag-wrapper">
+              <h1 className="tag-heading">{tagHeader}</h1>
+              <ul className="tag-info">
                   {
                       edges.map(({node}) => {
                           const {slug, title} = node
@@ -25,7 +27,7 @@ const Tags = ({pageContext, data}) => {
                       })
                   }
               </ul>
-              <Link to="/tags">All Tags</Link>
+              <Link className="all-tags" to="/tags">All Tags</Link>
           </main>
       )
 }

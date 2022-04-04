@@ -1,8 +1,8 @@
 import React, {
     Component
 } from 'react';
-import {graphql, Link} from 'gatsby'
-import {Timeline, Power1} from 'gsap/all'
+import {graphql, Link, navigate} from 'gatsby'
+import {gsap} from 'gsap'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronRight, FiChevronLeft} from 'react-icons/fi';
@@ -12,10 +12,10 @@ import "../styles/list.scss"
 
 
 class BlogList extends Component{
-    // constructor(props) {
-    //     super(props);
-    //     this.timeline = new Timeline({ paused: true });
-    //   }
+    constructor(props) {
+        super(props);
+      }
+
 
     render() {
         const {data} = this.props;
@@ -48,11 +48,11 @@ class BlogList extends Component{
                         const description = node.description
                         const tag = node.tag
                         const date = node.createdAt
-                        console.log(slug)
+
                         return(
                             <li className="posts" key={id}>
                                 <span className="title-wrapper">
-                                <Link className="post-title" to={`/${slug}`} key={`post-${slug}`}>
+                                <Link className="post-title" to={`/${slug}`} key={`post-${slug}`} onClick={e => this.changePage(e, `/${slug}`)}>
                                     <h2>{title}</h2>
                                 </Link>
                                 <IconContext.Provider value={{ className: "small-icons" }}>
@@ -71,6 +71,7 @@ class BlogList extends Component{
                     })
                 }
                 </ul>
+                <About />
                 <nav className="pagination">
                     {!isFirst && (
                         <Link to={prevPage} className="prevpage" rel='prev'>

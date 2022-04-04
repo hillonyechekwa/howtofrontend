@@ -1,0 +1,19 @@
+.about-wrapper{
+    width: 350px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 70%;
+    font-family: $text-font;
+    font-size: .85rem;
+    h2{
+        font-family: $title-font;
+        font-size: 1.8rem;
+    }
+    p{
+        width: 300px;
+        margin-top: 10px;
+        color: $jet-black;
+        line-height: $line-height;
+    }
+}

@@ -1,0 +1,32 @@
+.tags-wrapper{
+    width: 80%;
+    position: relative;
+    left: 10%;
+}
+
+.tags-heading{
+    font-family: $title-font;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.tag-list{
+    list-style: none;
+    margin-left: 0px;
+    li{
+        margin-bottom: 30px;
+        a{
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: $title-font;
+            color: $jet-black;
+            text-transform: capitalize;
+            &:hover{
+                color: $light;
+            }
+        }
+    }
+}
