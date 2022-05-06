@@ -59,7 +59,7 @@ class BlogPostTemplate extends Component{
             <main className="post-wrapper">
                 <header className="post-header" ref={el => this.headerRef = el}>
                 <IconContext.Provider value={{ className: "post-icons"}}>
-                    <Link to="/" className="backlink"> <FiChevronLeft /> back to blog </Link>
+                    <button onclick={() => navigate(-1)} className="backlink"> <FiChevronLeft /> back to blog </button>
                     <h1>{title}</h1>
                     <small className="date"><FiClock /> {dayjs(createdAt).fromNow()}</small>
                     <small className="tag"><FiTag /> <Link to={`/tags/${tag}`}> {tag}</Link> </small>

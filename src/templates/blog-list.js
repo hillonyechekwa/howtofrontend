@@ -1,5 +1,6 @@
 import React, {
-    Component
+    Component,
+    createRef
 } from 'react';
 import {graphql, Link, navigate} from 'gatsby'
 import {gsap} from 'gsap'
@@ -18,8 +19,30 @@ class BlogList extends Component{
         this.state = {
             isLoading: false,
         }
+        this.headingRef = createRef()
+        this.postsRef = createRef()
       }
-
+    
+      componentDidMount() {
+        // this.setState({isLoading: true})
+        // gsap.from('.list-wrapper', {
+        //     opacity: 0,
+        //     duration: 1,
+        //     ease: 'power3.out',
+        //     delay: 1
+        // })
+        // window.addEventListener('load', (event) => {
+            gsap.from([this.headingRef, this.postsRef],{
+                duration: 0.8,
+                dealy: 0.6,
+                ease: "power3.easeOut",
+                y: 100,
+                stagger:{
+                    amount: 0.15
+                }
+            })
+        // })
+      }
 
     render() {
         const {data} = this.props;
@@ -40,26 +63,27 @@ class BlogList extends Component{
                 <main className="list-wrapper">
                     {
                         isFirst && (
-                    <h1 className="page-heading">Latest Posts</h1>
+                    <h1 className="page-heading" ref={el => this.headingRef = el}>Latest Posts</h1>
                         )
                     }
                     {
                         !isFirst && (
-                    <h1 className="page-heading">Posts</h1>
+                    <h1 className="page-heading" ref={el => this.headingRef = el}>Posts</h1>
                         )
                     }
                     <ul className="post-list">
                     {
                     posts.map(({node}) => {
-                        const id = node.id
-                        const title = node.title
-                        const slug = node.slug
-                        const description = node.description
-                        const tag = node.tag
-                        const date = node.createdAt
+                        // const id = node.id
+                        // const title = node.title
+                        // const slug = node.slug
+                        // const description = node.description
+                        // const tag = node.tag
+                        // const date = node.createdAt
+                        const {id, title, slug, description, tag, date} = node
 
                         return(
-                            <li className="posts" key={id}>
+                            <li className="posts" key={id} ref={el => this.postsRef = el}>
                                 <span className="title-wrapper">
                                 <Link className="post-title" to={`/${slug}`} key={`post-${slug}`}>
                                     <h2>{title}</h2>
@@ -121,7 +145,7 @@ export const query = graphql`
                     slug
                     description
                     tag
-                    createdAt
+                    date: createdAt
                 }
             }
         }

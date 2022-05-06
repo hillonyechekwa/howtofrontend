@@ -2,8 +2,9 @@ import React,{useState} from 'react';
 import { navigate } from 'gatsby';
 import { FiSend } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
+import '../styles/newsletter.scss';
 
-const NewsLetter = () => {
+const Form = () => {
     const [name, setName] = useState('');
 
     const handleInput = (e) => {
@@ -41,4 +42,4 @@ const NewsLetter = () => {
     )
 }
 
-export default NewsLetter
+export default Form
