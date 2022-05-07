@@ -7,9 +7,9 @@ import '../styles/newsletter.scss';
 const Form = () => {
     const [name, setName] = useState('');
 
-    const handleInput = (e) => {
-        setName(e.target.value);
-    }
+    // const handleInput = (e) => {
+    //     setName(e.target.value);
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();

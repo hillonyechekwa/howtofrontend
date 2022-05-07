@@ -30,32 +30,27 @@ const SearchPage = () => {
     `)
 
     const allPosts = data.allGraphCmsPost.edges
+    console.log('allposts', allPosts)
+
 
     const handleSearch = event => {
-        event.preventDefault()
-        //handler function for search logic.
-        //get input value
-        const query = event.traget.value
-        //get all of our posts
-        const posts = data.allGraphCmsPost.edges || []
+        const query = event.target.value
+        console.log(event.target.value)
 
-        //return all filtered posts
+        const posts = data.allGraphCmsPost.edges || []
+        console.log('posts in handler', posts)
+
         const filteredData = posts.filter(post => {
-            //destructure data from post node
-            const {title, description, tag} = post.node
-            //standardize data with .lowerCase()
-            //return true if description, title or tags
-            //contain the query string
-            description.toLowerCase().includes(query.toLowerCase()) ||
-            title.toLowerCase().includes(query.toLowerCase()) ||
-            tag.toLowerCase().includes(query.toLowerCase()) //tag is done like this because
-            //i set my tag to be just one tag per post,
-            //instead of an array of tags per post.
+            const {description, title, tag} = post.node
+            return(
+                description.toLowerCase().includes(query.toLowerCase()) ||
+                title.toLowerCase().includes(query.toLowerCase()) ||
+                tag.toLowerCase().includes(query.toLowerCase())
+            )
         })
-        //update State according to latest query results
         setSearch({
-            query, //with current query string from the input event
-            filteredData //with filtered data from posts.filter(post => //filterdData)
+            query,
+            filteredData
         })
     }
 
@@ -63,42 +58,36 @@ const SearchPage = () => {
     const hasSearchResults = filteredData && query !== emptyQuery
     const posts = hasSearchResults ? filteredData : []
 
+
+
     return(
-        <main className="search-wrapper" >
-        <form action="" className="search-form" onSubmit={handleSearch}>
-            <header>
-                Search
-            </header>on/>
-            <input type="submit" value="Search"></input> //replace value with search feather icon
-        </form>
-        <section className="search-results"> 
-        {posts.map(({node}) => {
-            const {title, id, slug, description, tag, date} = node
-            //add return value here
-            return(
-                <li className="" key={id}>
-                    <span className="">
-                    <Link className="" to={`/${slug}`} key={`post-${slug}`}>
+        <>
+        <form>
+            <label htmlFor="search"></label>
+        <input
+            type="text"
+            aria-label="Search"
+            id="search"
+            placeholder="whatcha looking for?"
+            onChange={handleSearch}
+            />
+            </form>
+        {
+            posts.map(({node}) => {
+                const {id, title, slug, description, tag , date} = node
+                return(
+                    <section>
+                    <Link key={`post-${slug}`} to={`/${slug}`}>
                         <h2>{title}</h2>
                     </Link>
-                    <IconContext.Provider value={{ className: "" }}>
-                        <small>
-                                <FiTag/> <Link to={`/tags/${tag}`}> {tag} </Link> <span>.</span> <FiClock /> {
-                            dayjs(date).fromNow()
-                                }
-                        </small>
-                    </IconContext.Provider>
-                    </span>
-                        <p>{description}</p>
-                        <Link to={`/${slug}`} className="read-more">Read More <FiChevronRight/></Link>
-                                
-                </li>
-            )
-        })}
-        </section>
-        </main>
+                    <p>{description}</p>
+                    <span> <Link to={`/tags/${tag}`}>{tag}</Link> | {dayjs(date).fromNow()} </span>
+                    </section>
+                )
+            })
+        }
+        </>
     )
 }
-
 
 export default SearchPage;
