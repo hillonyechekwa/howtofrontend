@@ -96,7 +96,7 @@ module.exports = {
               feeds: [
                 {
                   serialize: ({ query: { site, allGraphCmsPost } }) => {
-                    return allGraphcmsPost.edges.map(({node}) => {
+                    return allGraphCmsPost.edges.map(({node}) => {
                       return Object.assign({}, node, {
                         description: node.excerpt,
                         date: node.date,

@@ -28,15 +28,12 @@ const SearchPage = () => {
     `)
 
     const allPosts = data.allGraphCmsPost.edges
-    console.log('allposts', allPosts)
 
 
     const handleSearch = event => {
         const query = event.target.value
-        console.log(event.target.value)
 
         const posts = data.allGraphCmsPost.edges || []
-        console.log('posts in handler', posts)
 
         const filteredData = posts.filter(post => {
             const {description, title, tag} = post.node
