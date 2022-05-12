@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {useStaticQuery, graphql, Link} from 'gatsby'
+import {FiSearch} from 'react-icons/fi'
+import {IconContext} from "react-icons";
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import {FiClock, FiTag, FiChevronRight, FiChevronLeft} from 'react-icons/fi';
-import { IconContext } from "react-icons";
+import '../styles/search.scss'
+
 
 const SearchPage = () => {
     const emptyQuery = ""
@@ -17,7 +18,6 @@ const SearchPage = () => {
         allGraphCmsPost {
             edges {
             node {
-                id
                 title
                 slug
                 description
@@ -61,32 +61,36 @@ const SearchPage = () => {
 
 
     return(
-        <>
-        <form>
-            <label htmlFor="search"></label>
-        <input
-            type="text"
-            aria-label="Search"
-            id="search"
-            placeholder="whatcha looking for?"
-            onChange={handleSearch}
-            />
-            </form>
+        <main className="search-wrapper">
+        <form className="search-form">
+            <div className="form-control">
+                    <label htmlFor="search">
+                        
+                    </label>
+                <input
+                    type="text"
+                    aria-label="Search"
+                    id="search"
+                    placeholder="whatcha looking for?"
+                    onChange={handleSearch}
+                    />
+            </div>
+         </form>
         {
             posts.map(({node}) => {
-                const {id, title, slug, description, tag , date} = node
+                const {title, slug, description, tag , date} = node
                 return(
-                    <section>
-                    <Link key={`post-${slug}`} to={`/${slug}`}>
-                        <h2>{title}</h2>
-                    </Link>
-                    <p>{description}</p>
-                    <span> <Link to={`/tags/${tag}`}>{tag}</Link> | {dayjs(date).fromNow()} </span>
+                    <section className="search-results">
+                        <Link className="result-title" key={`post-${slug}`} to={`/${slug}`}>
+                            <h2>{title}</h2>
+                        </Link>
+                        <p>{description}</p>
+                        <span> <Link to={`/tags/${tag}`}>{tag}</Link> | {dayjs(date).fromNow()} </span>
                     </section>
                 )
             })
         }
-        </>
+        </main>
     )
 }
 

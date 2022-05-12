@@ -21,7 +21,7 @@ const Tags = ({pageContext, data}) => {
                           const {slug, title} = node
                           return(
                               <li key={slug} >
-                                  <Link to={slug}>{title}</Link>
+                                  <Link to={`/${slug}`}>{title}</Link>
                               </li>
                           )
                       })

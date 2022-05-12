@@ -1,5 +1,5 @@
 import React from 'react';
-import {useStaticQuery, graphql, Link} from 'gatsby'
+import {useStaticQuery, graphql} from 'gatsby'
 import '../styles/about.scss'
 
 
@@ -32,7 +32,7 @@ const About = () =>{
     return(
         <section className="about-wrapper">
            <section className="about-blog">
-               <h2>About the blog</h2>
+               <h2>About {title}</h2>
                <p>{description}</p> 
            </section>
            <section className="about-author">

@@ -1,11 +1,9 @@
 import React, {
     Component,
-    createRef
 } from 'react';
-import Seo from '../components/seo'
-import Loader from '../components/loader'
+import Seo from '../components/Seo'
+import Form from '../components/form'
 import {graphql, Link, navigate} from 'gatsby';
-import {gsap} from 'gsap'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronLeft, FiArrowRight, FiArrowLeft} from 'react-icons/fi';
@@ -17,26 +15,9 @@ import '../styles/post.scss'
 class BlogPostTemplate extends Component{
     constructor(props) {
         super(props);
-        this.state = {
-            isLoading: false,
-        }
-        this.headerRef = createRef();
-        this.contentRef = createRef();
-        this.postendRef = createRef();
+        
     }
 
-
-    componentDidMount () {
-        gsap.from([this.headerRef, this.contentRef, this.postendRef],{
-            duration: 0.8,
-            dealy: 0.6,
-            ease: "power3.easeOut",
-            y: 100,
-            stagger:{
-                amount: 0.15
-            }
-        })
-    }
 
     render() {
         const {data} = this.props;
@@ -50,28 +31,27 @@ class BlogPostTemplate extends Component{
             title: title,
         }
         dayjs.extend(relativeTime)
-        
-        if(this.state.isLoading){
-            return <Loader />
-        }
+    
 
         return(
             <main className="post-wrapper">
-                <header className="post-header" ref={el => this.headerRef = el}>
+                <header className="post-header">
                 <IconContext.Provider value={{ className: "post-icons"}}>
-                    <button onclick={() => navigate(-1)} className="backlink"> <FiChevronLeft /> back to blog </button>
-                    <h1>{title}</h1>
+                   <button  className="backlink" onClick={() => {navigate(-1)}}> <FiChevronLeft /> back to blog </button>
+                    <div className="article-meta">
+                        <h1>{title}</h1>
+                        <p>{description}</p>
+                    </div>
                     <small className="date"><FiClock /> {dayjs(createdAt).fromNow()}</small>
                     <small className="tag"><FiTag /> <Link to={`/tags/${tag}`}> {tag}</Link> </small>
                 </IconContext.Provider>
                 </header>
                 <article
-                ref={el => this.contentRef = el}
                 dangerouslySetInnerHTML={{__html: content.html}}
                 itemProp="article-body"
                 className="post-body"
                 ></article>
-                <section className="post-end" ref={el => this.postendRef = el}>
+                <section className="post-end">
                 <ul className="other-posts">
                     <li className="previous">
                         {
@@ -98,6 +78,7 @@ class BlogPostTemplate extends Component{
                     <Disqus config={disqusConfig} />
                 </section>
                 </section>
+                <Form />
             </main>
         )
     }

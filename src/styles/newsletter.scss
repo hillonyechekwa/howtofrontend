@@ -1,0 +1,92 @@
+.email-form{
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    border-radius: 10px;
+    // border: 1px solid $jet-black;
+}
+
+.form-group{
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    background-color: $jet-black;
+    position: relative;
+    header{
+        font-family: $text-font;
+        // background-color: $jet-black;
+        color: $white;
+        padding: 10px;
+        border-radius: 5px;
+        h2{
+            font-family: $title-font;
+        }
+    }
+}
+
+.email-form-control{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: $primary;
+    border-radius: 10px;
+    position: relative;
+    label{
+        font-family: $text-font;
+        font-size: 1rem;
+        font-weight: 500;
+        color: $white;
+        &::placeholder{
+             color: $white;
+        }
+    }
+}
+
+.input-wrapper{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0 10px;
+    input{
+        background: none;
+        color: $white;
+        font-family: $text-font;
+        position: relative;
+        left: 5px;
+        border: none;
+        border-bottom: 2px solid $white;
+        outline: none;
+    }
+}
+
+.submit-btn{
+    position: relative;
+    left: 10%;
+    bottom: 10%;
+    background-color: $jet-black;
+    color: $white;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    height: 25px;
+    transition: all 2s ease;
+    cursor: pointer;
+    &:hover{
+        background-color: $light;
+    }
+}
+
+#claimer{
+    font-family: $text-font;
+    color: $white;
+    width: 200px;
+    margin-left: 30px;
+}

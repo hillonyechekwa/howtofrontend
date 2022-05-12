@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link, useStaticQuery, graphql} from 'gatsby'
+import {FiSearch} from 'react-icons/fi'
+import {IconContext} from 'react-icons'
 import '../styles/nav.scss';
 
 const Nav = () => {
@@ -17,12 +19,12 @@ const Nav = () => {
     return(
         <nav className="nav">
             <h1 className="logo"><Link to="/">{title} </Link> </h1>
-            <nav className="nav-items">
-             <Link active to="/about" className="nav-item" activeClassName='active'>about</Link>
-             <Link to="/subscribe" className="nav-item" activeClassName='active'>subscribe</Link>
-             <Link to="/search" className="nav-item" activeClassName='active'>search</Link>
-            </nav>
-            <div className="line"></div>
+             <Link to="/search" className="search-link" activeClassName='active'>
+                 <IconContext.Provider value={{className: "home-search-icon", size: '1.8em'}}>
+                     <FiSearch />
+                 </IconContext.Provider>
+             </Link>
+           
         </nav>
     )
 }

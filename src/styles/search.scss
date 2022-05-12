@@ -1,0 +1,41 @@
+.search-wrapper{
+    width: 100%;
+}
+
+.search-form{
+    width: 500px;
+    height: 150px;
+    position: relative;
+    top: 50px;
+    left: 35%;
+}
+
+.form-control input{
+    width: 350px;
+    height: 30px;
+    font-family: $text-font;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+.search-results{
+    position: relative;
+    left: 35%;
+    font-family: $text-font;
+    a{
+        text-decoration: none;
+        &:hover{
+            color: darken($primary, 10%);
+        }
+    }
+    .result-title{
+        color: $jet-black;
+        font-weight: 300;
+        font-family: $title-font;
+        transition: all 3s ease;
+        &:hover{
+            font-weight: 500;
+        }
+    }
+
+}

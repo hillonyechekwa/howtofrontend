@@ -1,53 +1,23 @@
 import React, {
     Component,
-    createRef
 } from 'react';
-import {graphql, Link, navigate} from 'gatsby'
-import {gsap} from 'gsap'
-import Loader from '../components/loader'
+import {graphql, Link} from 'gatsby'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {FiClock, FiTag, FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import { IconContext } from "react-icons";
 import About from '../components/about';
+import Form from '../components/form';
 import "../styles/list.scss"
 
 
 class BlogList extends Component{
     constructor(props) {
         super(props);
-        this.state = {
-            isLoading: false,
-        }
-        this.headingRef = createRef()
-        this.postsRef = createRef()
       }
-    
-      componentDidMount() {
-        // this.setState({isLoading: true})
-        // gsap.from('.list-wrapper', {
-        //     opacity: 0,
-        //     duration: 1,
-        //     ease: 'power3.out',
-        //     delay: 1
-        // })
-        // window.addEventListener('load', (event) => {
-            gsap.from([this.headingRef, this.postsRef],{
-                duration: 0.8,
-                dealy: 0.6,
-                ease: "power3.easeOut",
-                y: 100,
-                stagger:{
-                    amount: 0.15
-                }
-            })
-        // })
-      }
-
     render() {
         const {data} = this.props;
         const posts = data.allGraphCmsPost.edges;
-        const sitename = data.site.siteMetadata.title
         const {currentPage, numPages} = this.props.pageContext;
         const isFirst = currentPage === 1;
         const isLast = currentPage === numPages;
@@ -55,68 +25,63 @@ class BlogList extends Component{
         const nextPage = (currentPage + 1).toString()
         dayjs.extend(relativeTime)
 
-        if(this.state.isLoading){
-            return <Loader />
-        }
 
-        return (
-                <main className="list-wrapper">
+              return  (<main className="list-wrapper">
                     {
                         isFirst && (
-                    <h1 className="page-heading" ref={el => this.headingRef = el}>Latest Posts</h1>
+                    <h1 className="page-heading">Latest Posts</h1>
                         )
                     }
                     {
                         !isFirst && (
-                    <h1 className="page-heading" ref={el => this.headingRef = el}>Posts</h1>
+                    <h1 className="page-heading">Posts</h1>
                         )
                     }
                     <ul className="post-list">
                     {
                     posts.map(({node}) => {
-                        // const id = node.id
-                        // const title = node.title
-                        // const slug = node.slug
-                        // const description = node.description
-                        // const tag = node.tag
-                        // const date = node.createdAt
+                        
                         const {id, title, slug, description, tag, date} = node
 
                         return(
-                            <li className="posts" key={id} ref={el => this.postsRef = el}>
+                            <li className="posts" key={id} ref={(el) => {this.postsRef = el}}>
+                                <IconContext.Provider value={{ className: "small-icons", size: '1.5em' }}>
+
                                 <span className="title-wrapper">
                                 <Link className="post-title" to={`/${slug}`} key={`post-${slug}`}>
                                     <h2>{title}</h2>
                                 </Link>
-                                <IconContext.Provider value={{ className: "small-icons" }}>
                                     <small>
                                          <FiTag/> <Link to={`/tags/${tag}`}> {tag} </Link> <span>.</span> <FiClock /> {
                                         dayjs(date).fromNow()
                                          }
                                     </small>
-                                </IconContext.Provider>
+                                
                                 </span>
                                     <p>{description}</p>
                                     <Link to={`/${slug}`} className="read-more">Read More <FiChevronRight/></Link>
-                                
+                                </IconContext.Provider>
                             </li>
                         )
                     })
                 }
                 </ul>
-                <About />
                 <nav className="pagination">
+                    <IconContext.Provider value={{className: "pag-icons", size: "1.8em"}}>
                     {!isFirst && (
-                        <Link to={prevPage} className="prevpage" rel='prev'>
+                        <Link to={prevPage} className="prevpage pag" rel='prev'>
                            <FiChevronLeft />  newer
                         </Link>
                     )}
                     {!isLast && (
-                        <Link to={nextPage} className="nextpage" rel='next'>
+                        <Link to={nextPage} className="nextpage pag" rel='next'>
                             older <FiChevronRight/>
                         </Link>
                     )}
+                    </IconContext.Provider>
                 </nav>
+                <About />
+                <Form />
                 </main>
         ) 
     }

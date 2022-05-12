@@ -1,19 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Footer from './footer';
 import Nav from './nav'
-import Loader from './loader';
 import '../styles/layout.scss'
 
 
 const Layout = ({children}) => {
-    const [isLoading, setIsLoading] = useState(false);
-    if(isLoading){
-        return (<div className="contiainer">
-            <Loader />
-        </div>)
-    }
-    return(
-        <div className="container">
+
+
+    return(<div className="container">
             <div className="wrapper">
                 <Nav />
                     <main className="content">
@@ -21,8 +15,7 @@ const Layout = ({children}) => {
                     </main>
                 </div>
             <Footer />
-        </div>
-    )
+        </div>) 
 }
 
 export default Layout
