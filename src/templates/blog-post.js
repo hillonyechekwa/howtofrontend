@@ -13,10 +13,7 @@ import '../styles/post.scss'
 
 
 class BlogPostTemplate extends Component{
-    constructor(props) {
-        super(props);
-        
-    }
+    
 
 
     render() {

@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {useStaticQuery, graphql, Link} from 'gatsby'
-import {FiSearch} from 'react-icons/fi'
-import {IconContext} from "react-icons";
 import dayjs from 'dayjs'
 import '../styles/search.scss'
 

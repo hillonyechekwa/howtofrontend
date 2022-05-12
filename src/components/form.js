@@ -5,35 +5,36 @@ import { IconContext } from 'react-icons';
 import '../styles/newsletter.scss';
 
 const Form = ({location}) => {
-    const [sending, setSending] = useState(false);
+    // const [sending, setSending] = useState(false);
  
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setSending(true)
-        const data = new FormData(event.target)
-        fetch('/netlify/functions/subscribe', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: data.get('name'),
-                email: data.get('email')
-            })
-        })
-        .then(res => {
-            if(res.status === 200 && res.redirected === true){
-                // location.href = res.url
-                console.log(res.url)
-                navigate(res.url, {state: data.get('name')})
-            }
-        })
-        .catch(error => {
-            alert(error)
-        })
-    }
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     setSending(true)
+    //     const data = new FormData(event.target)
+    //     fetch('/netlify/functions/subscribe', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             name: data.get('name'),
+    //             email: data.get('email')
+    //         })
+    //     })
+    //     .then(res => {
+    //         if(res.status === 200 && res.redirected === true){
+    //             // location.href = res.url
+    //             console.log(res.url)
+    //             navigate(res.url, {state: data.get('name')})
+    //         }
+    //     })
+    //     .catch(error => {
+    //         alert(error)
+    //     })
+    // }
 
 
 
     return(
-        <form className="email-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+        // add onSubmit={handleSubmit} listner on form
+        <form className="email-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <div className="form-group">
                 <header>
                     <h2>Won't it be nice to get my content first?</h2>
@@ -54,7 +55,7 @@ const Form = ({location}) => {
                     id="name" 
                     placeholder="enter your name..." 
                     required
-                    disabled={sending}
+                    // disabled={sending}
                     />
                     </div>
                 <div className="input-wrapper">
@@ -67,7 +68,7 @@ const Form = ({location}) => {
                     aria-describedby="emailHelp" 
                     placeholder="Enter your email address" 
                     required 
-                    disabled={sending}
+                    // disabled={sending}
                     />
                     </div>
 
@@ -76,14 +77,17 @@ const Form = ({location}) => {
                 <button 
                     type="submit" 
                     className="submit-btn"
-                    disabled={sending}
+                    // disabled={sending}
                     >
-                    {sending ? <IconContext.Provider value={{className: 'sending'}}>
+                    {/* {sending ? <IconContext.Provider value={{className: 'sending'}}>
                                     <FiSend />
                                 </IconContext.Provider> : 
                             <IconContext.Provider value={{className: 'subscribe'}}>
                                 <FiMail /> Subscribe
-                            </IconContext.Provider>}                   
+                            </IconContext.Provider>}    */}
+                            <IconContext.Provider value={{className: 'sending'}}>
+                                    <FiSend />
+                                </IconContext.Provider>                
                 </button>
                 </IconContext.Provider>
                 </div>

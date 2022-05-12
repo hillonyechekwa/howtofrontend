@@ -12,9 +12,7 @@ import "../styles/list.scss"
 
 
 class BlogList extends Component{
-    constructor(props) {
-        super(props);
-      }
+    
     render() {
         const {data} = this.props;
         const posts = data.allGraphCmsPost.edges;
